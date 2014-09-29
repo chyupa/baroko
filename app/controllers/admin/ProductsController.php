@@ -11,6 +11,9 @@ class ProductsController extends \BaseController {
 	public function index()
 	{
 		//
+		$products = Products::all();
+
+		return View::make('admin.products.index', compact('products'));
 	}
 
 	/**
@@ -58,6 +61,10 @@ class ProductsController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$product = Products::find($id);
+		$ext = ['m'=>'m', 'buc'=>'buc', 'punga'=>'punga'];
+		$categories = Categories::lists('name', 'id');
+		return View::make('admin.products.edit', compact('product', 'ext', 'categories'));
 	}
 
 	/**
