@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'barokos_db',
+			'database'  => 'baroko_db',
 			'username'  => 'baroko_user',
 			'password'  => '3EW6CuXe',
 			'charset'   => 'utf8',

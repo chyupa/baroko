@@ -3,6 +3,6 @@
 @section('content')
 	<h1>Create Category</h1>
 	{{Form::open(array('route'=>'admin.categories.store'))}}
-		@include('admin.categories._partials.categories_form')
+		@include('admin.categories._partials.form')
 	{{Form::close()}}
 @stop

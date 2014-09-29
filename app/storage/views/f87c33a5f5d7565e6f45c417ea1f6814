@@ -1,4 +1,4 @@
-<h4>Dashboard Baroko, welcome <strong></strong></h4>
+<h4>Dashboard Baroko, welcome <strong><?php echo Auth::user()->name; ?></strong></h4>
 <ul class="nav navbar-nav">
 	<li><?php echo link_to_route('admin.products.create', 'Create Product'); ?></li>
 	<li><?php echo link_to_route('admin.categories.create', 'Create Category'); ?></li>

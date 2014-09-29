@@ -7,11 +7,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<?php echo $__env->make('admin.layouts.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-		</div>
-	</nav>
+	<?php if(Auth::check()): ?>
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<?php echo $__env->make('admin.layouts.menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+			</div>
+		</nav>
+	<?php endif; ?>
 	<div class="container">
 		<?php echo $__env->yieldContent('content'); ?>
 	</div>

@@ -12,7 +12,7 @@ class CategoriesController extends \BaseController {
 	{
 		//
 		$categories = Categories::all();
-		return View::make('admin.categories.categories', compact('categories'));
+		return View::make('admin.categories.index', compact('categories'));
 	}
 
 	/**
@@ -75,7 +75,7 @@ class CategoriesController extends \BaseController {
 	{
 		//
 		$category = Categories::find($id);
-		return View::make('admin.categories.categories_edit', compact('category'));
+		return View::make('admin.categories.edit', compact('category'));
 	}
 
 	/**

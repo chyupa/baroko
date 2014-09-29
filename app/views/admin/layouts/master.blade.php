@@ -7,11 +7,13 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			@include('admin.layouts.menu')
-		</div>
-	</nav>
+	@if(Auth::check())
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				@include('admin.layouts.menu')
+			</div>
+		</nav>
+	@endif
 	<div class="container">
 		@yield('content')
 	</div>
