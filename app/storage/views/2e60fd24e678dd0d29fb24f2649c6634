@@ -1,0 +1,28 @@
+<?php $__env->startSection('content'); ?>
+	<h1 class="text-center">Login Form</h1>
+	<div class="col-md-push-3 col-md-6 col-md-push-3">
+		<?php echo Form::open(array('route'=>'admin.post.login')); ?>
+
+			<div class="form-group">
+				<?php echo Form::label('username', 'Username'); ?>
+
+				<?php echo Form::text('username', null, array('class'=>'form-control')); ?>
+
+				<?php echo $errors->first('username', '<p class="error">:message</p>'); ?>
+
+			</div>
+			<div class="form-group">
+				<?php echo Form::label('password', 'Password'); ?>
+
+				<?php echo Form::password('password', array('class'=>'form-control')); ?>
+
+				<?php echo $errors->first('password', '<p class="error">:message</p>'); ?>
+
+			</div>
+			<?php echo Form::submit('Login', array('class'=>'btn btn-primary')); ?>
+
+		<?php echo Form::close(); ?>
+
+	</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

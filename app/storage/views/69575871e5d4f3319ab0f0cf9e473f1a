@@ -1,0 +1,22 @@
+<?php $__env->startSection('content'); ?>
+	<h1 class="text-left">Subcategories</h1>
+	<?php if(count($subcategories)): ?>
+		<ul>
+			<?php foreach($subcategories as $sub): ?>
+				<li>
+					<?php echo link_to_route('admin.subcategories.edit', $sub->name, array($sub->id)); ?>
+
+					<?php echo Form::open( array( 'route'=> array( 'admin.subcategories.destroy', $sub->id ), 'method'=>'delete', 'class'=>'btn btn-default' ) ); ?>
+
+						<?php echo Form::submit('Delete'); ?>
+
+					<?php echo Form::close(); ?>
+
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	<?php else: ?>
+		<h1 class="text-center">No Subcategories Found</h1>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

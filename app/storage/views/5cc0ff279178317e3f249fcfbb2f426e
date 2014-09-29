@@ -1,0 +1,19 @@
+<?php $__env->startSection('content'); ?>
+	<?php if(count($categories)): ?>
+		<ul>
+			<?php foreach($categories as $cat): ?>
+				<li>
+					<?php echo link_to_route('admin.categories.edit', $cat->name, array($cat->id)); ?>
+
+					<?php echo Form::open(array('route' => array('admin.categories.destroy', $cat->id), 'method' => 'delete', 'class' => 'destroy')); ?>
+
+					<?php echo Form::submit('Delete'); ?>
+
+					<?php echo Form::close(); ?>
+
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

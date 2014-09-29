@@ -1,0 +1,17 @@
+<div class="form-group">
+	<?php echo Form::label('name'); ?>
+
+	<?php echo Form::text('name', null, ['class'=>'form-control']); ?>
+
+	<?php echo $errors->first('name', '<p class="error">:message</p>'); ?>
+
+</div>
+<div class="form-group">
+	<?php echo Form::label('parent'); ?>
+
+	<?php echo Form::select('parent', $categories, $subcategory->parent, ['class' => 'form-control']); ?>
+
+	<?php echo $errors->first('parent', '<p class="error">:message</p>'); ?>
+
+</div>
+	<?php echo Form::submit('Save Subcategory', ['class'=>'btn btn-primary']); ?>
