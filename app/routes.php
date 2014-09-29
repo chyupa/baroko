@@ -25,4 +25,5 @@ Route::group(array('prefix'=>'admin', 'before'=>'auth'), function(){
 	Route::get('dashboard', array('as'=>'admin.get.dashboard', 'uses'=>'AdminController@getDashboard'));
 	Route::resource('products','ProductsController', array('except'=>'show'));
 	Route::resource('categories', 'CategoriesController');
+	Route::resource('subcategories', 'SubcategoriesController');
 });

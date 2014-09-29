@@ -9,7 +9,7 @@
 <body>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
-			@yield('menu')
+			@include('admin.layouts.menu')
 		</div>
 	</nav>
 	<div class="container">

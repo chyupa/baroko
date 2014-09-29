@@ -1,9 +1,6 @@
 <div class="form-group">
 	{{Form::label('name')}}
-	{{Form::text('name', ['class'=>'form-control'])}}
+	{{Form::text('name', null, ['class'=>'form-control'])}}
+	{{$errors->first('name', '<p class="error">:message</p>')}}
 </div>
-	{{Form::submit('Create Category', ['class'=>'btn btn-primary'])}}
-
-
-
-
+	{{Form::submit('Save Category', ['class'=>'btn btn-primary'])}}

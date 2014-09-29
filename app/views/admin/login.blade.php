@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
-<h1 class="text-center">Login Form</h1>
 @section('content')
+	<h1 class="text-center">Login Form</h1>
 	<div class="col-md-push-3 col-md-6 col-md-push-3">
 		{{Form::open(array('route'=>'admin.post.login'))}}
 			<div class="form-group">

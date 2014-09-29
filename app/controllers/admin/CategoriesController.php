@@ -11,6 +11,8 @@ class CategoriesController extends \BaseController {
 	public function index()
 	{
 		//
+		$categories = Categories::all();
+		return View::make('admin.categories.categories', compact('categories'));
 	}
 
 	/**
@@ -22,6 +24,7 @@ class CategoriesController extends \BaseController {
 	public function create()
 	{
 		//
+		return View::make('admin/categories/create');
 	}
 
 	/**
@@ -33,6 +36,20 @@ class CategoriesController extends \BaseController {
 	public function store()
 	{
 		//
+		$data = array(
+			'name' => Input::get('name')
+		);
+
+		$validator = Validator::make($data, Categories::$rules);
+
+		if( $validator->fails() )
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		Categories::create($data);
+		
+		return Redirect::route('admin.categories.index');
 	}
 
 	/**
@@ -57,6 +74,8 @@ class CategoriesController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$category = Categories::find($id);
+		return View::make('admin.categories.categories_edit', compact('category'));
 	}
 
 	/**
@@ -69,6 +88,19 @@ class CategoriesController extends \BaseController {
 	public function update($id)
 	{
 		//
+		$data = [
+			'name' => Input::get('name')
+		];
+		$category = Categories::findOrFail($id);
+		$validator = Validator::make( $data, Categories::$rules );
+
+		if( $validator->fails() )
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$category->update($data);
+		return Redirect::route('admin.categories.index');
 	}
 
 	/**
@@ -81,6 +113,8 @@ class CategoriesController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		Categories::destroy($id);
+		return Redirect::route('admin.categories.index');
 	}
 
 }
