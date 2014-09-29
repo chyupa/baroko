@@ -104,11 +104,13 @@ class AdminController extends \BaseController {
 		
 		return Redirect::route('admin.get.login');
 	}
+	
 
 	public function getDashboard()
 	{
 		return View::make('admin/dashboard');
 	}
+
 
 	public function logout()
 	{
