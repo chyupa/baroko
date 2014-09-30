@@ -81,6 +81,38 @@ class GalleryController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+		$data = Input::all();
+		// dd($data);
+		if( Request::ajax() )
+		{
+			$file = Gallery::findOrFail($data['photo_id']);
+			$path = public_path() . '/uploads/' . $file->product_id . '/';
+			$file_path = $path.$file->filename;
+			// dd($file_path);
+			$delete_file = File::delete($file_path);
+			$delete_id = Gallery::destroy($data['photo_id']);
+			if( $delete_file && $delete_id)
+			{
+				$result = [
+					'success' => true,
+					'msg' => 'Photo Deleted'
+				];
+				return Response::json($result);
+			}
+			else
+			{
+				$result = [
+					'success' => true,
+					'msg' => '#37 Something went wrong!'
+				];
+				return Response::json($result);
+			}
+		}
+		
+		// dd($directory);
+		// File::deleteDirectory($directory);
+		// Gallery::where('product_id', '=', $id)->delete();
+		// return Redirect::back();
 	}
 
 }

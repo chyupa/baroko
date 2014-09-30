@@ -27,7 +27,8 @@ class ProductsController extends \BaseController {
 		//
 		$categories = Categories::where('parent', '<>', 0)->lists('name', 'id');
 		$ext = ['m'=>'m', 'buc'=>'buc', 'punga'=>'punga'];
-		return View::make('admin.products.create', compact('categories', 'ext'));
+		$type = ['p'=>'Tesaturi de Lux', 'p_de'=>'Tesaturi Designer Edition', 'p_sw'=>'Cristale Swarowski'];
+		return View::make('admin.products.create', compact('categories', 'ext', 'type'));
 	}
 
 	/**
@@ -64,7 +65,15 @@ class ProductsController extends \BaseController {
 			$data['public'] = 1;
 		}
 
-		dd(Input::all());
+		if( Input::file('filename') )
+		{
+			$fileValidator = Validator::make( array( 'filename'=>Input::file('filename') ), Gallery::$rules );
+			// dd($fileValidator->errors());
+			if( $fileValidator->fails() )
+			{
+				return Redirect::back()->withInput()->withErrors($fileValidator);
+			}
+		}
 
 		$validator = Validator::make($data, Products::$rules);
 		if( $validator->fails() )
@@ -72,7 +81,27 @@ class ProductsController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
-		Products::create($data);
+		$file = Input::file('filename');
+		$extension =$file->getClientOriginalExtension();
+		$filename = Str::quickRandom($length = 16).time().".{$extension}";
+
+		$product = Products::create($data);
+
+		$path = public_path()."/uploads/".$product->id."/";
+		try
+		{
+			$tst = $file->move($path, $filename);
+		}
+		catch(Exception $e)
+		{
+			Log::error($e->getMessage());
+		}
+
+		Gallery::create([
+			'filename' => $filename,
+			'product_id' => $product->id
+		]);
+
 		return Redirect::route('admin.products.index');
 	}
 
@@ -100,8 +129,11 @@ class ProductsController extends \BaseController {
 		//
 		$product = Products::find($id);
 		$ext = ['m'=>'m', 'buc'=>'buc', 'punga'=>'punga'];
+		$type = ['p'=>'Tesaturi de Lux', 'p_de'=>'Tesaturi Designer Edition', 'p_sw'=>'Cristale Swarowski'];
 		$categories = Categories::where('parent', '<>', 0)->lists('name', 'id');
-		return View::make('admin.products.edit', compact('product', 'ext', 'categories'));
+		$files = Gallery::where('product_id', '=', $id)->get();
+		// dd($files);
+		return View::make('admin.products.edit', compact('product', 'ext', 'categories', 'files', 'type'));
 	}
 
 	/**
@@ -138,10 +170,10 @@ class ProductsController extends \BaseController {
 		{
 			$data['public'] = 1;
 		}
-
-		if( Input::get('image') )
+		// dd(Input::file('file'));
+		if( Input::file('filename') )
 		{
-			$fileValidator = Validator::make( array( 'filename'=>Input::get('image') ), Gallery::$rules );
+			$fileValidator = Validator::make( array( 'filename'=>Input::file('filename') ), Gallery::$rules );
 			// dd($fileValidator->errors());
 			if( $fileValidator->fails() )
 			{
@@ -149,11 +181,30 @@ class ProductsController extends \BaseController {
 			}
 		}
 
-		// dd('asd');
+		// dd(Input::all());
 		$validator = Validator::make($data, Products::$rules);
 		if( $validator->fails() )
 		{
 			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$file = Input::file('filename');
+		$extension =$file->getClientOriginalExtension();
+		$filename = Str::quickRandom($length = 16).time().".{$extension}";
+		// dd($filename);
+		Gallery::create([
+			'filename' => $filename,
+			'product_id' => $id
+		]);
+		$path = public_path()."/uploads/".$id."/";
+		// dd($path);
+		try
+		{
+			$tst = $file->move($path, $filename);
+		}
+		catch(Exception $e)
+		{
+			Log::error($e->getMessage());
 		}
 
 		$product = Products::findOrFail($id);

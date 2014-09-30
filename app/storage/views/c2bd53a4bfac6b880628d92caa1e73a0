@@ -2,7 +2,7 @@
 	<h1>Create Category</h1>
 	<?php echo Form::open(array('route'=>'admin.categories.store')); ?>
 
-		<?php echo $__env->make('admin.categories._partials.categories_form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		<?php echo $__env->make('admin.categories._partials.form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 	<?php echo Form::close(); ?>
 
 <?php $__env->stopSection(); ?>
