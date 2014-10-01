@@ -6,7 +6,6 @@
 			@foreach($products as $product)
 				<li>
 					{{ link_to_route('admin.products.edit', $product->name, array($product->id)) }}
-
 				</li>
 			@endforeach
 		</ul>

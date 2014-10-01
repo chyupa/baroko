@@ -25,6 +25,8 @@ class CreateProducts extends Migration {
 			$table->enum('public', array(0,1))->default(1);
 			$table->enum('featured', array(0,1))->default(0);
 			$table->date('marked_delete');
+			$table->enum('type', array('p', 'p_de', 'p_sw'))->nullable()->default(null);
+			$table->integer('gallery_id');
 			$table->timestamps();
 		});
 	}

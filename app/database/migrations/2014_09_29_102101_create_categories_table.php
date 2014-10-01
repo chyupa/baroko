@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->unique();
 			$table->enum('public', array(0,1))->default(1);
+			$table->integer('parent')->default(0);
 			$table->timestamps();
 		});
 	}
