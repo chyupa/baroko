@@ -7,9 +7,6 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AdminController' => $baseDir . '/app/controllers/admin/AdminController.php',
-    'AlterCategoriesTable' => $baseDir . '/app/database/migrations/2014_09_29_112339_alter_categories_table.php',
-    'AlterProducts' => $baseDir . '/app/database/migrations/2014_09_29_183022_alter_products.php',
-    'AlterUsersTable' => $baseDir . '/app/database/migrations/2014_09_26_133859_alter_users_table.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -36,6 +33,8 @@ return array(
     'ClassPreloader\\Parser\\NodeTraverser' => $vendorDir . '/classpreloader/classpreloader/src/ClassPreloader/Parser/NodeTraverser.php',
     'CreateCategoriesTable' => $baseDir . '/app/database/migrations/2014_09_29_102101_create_categories_table.php',
     'CreateGallery' => $baseDir . '/app/database/migrations/2014_09_29_181816_create_gallery.php',
+    'CreatePosts' => $baseDir . '/app/database/migrations/2014_10_02_133736_create_posts.php',
+    'CreatePostsGallery' => $baseDir . '/app/database/migrations/2014_10_02_134057_create_posts_gallery.php',
     'CreateProducts' => $baseDir . '/app/database/migrations/2014_09_29_065925_create_products.php',
     'CreateUsersTable' => $baseDir . '/app/database/migrations/2014_09_26_123111_create_users_table.php',
     'Crypt_AES' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/AES.php',
@@ -942,6 +941,7 @@ return array(
     'Patchwork\\TurkishUtf8' => $vendorDir . '/patchwork/utf8/class/Patchwork/TurkishUtf8.php',
     'Patchwork\\Utf8' => $vendorDir . '/patchwork/utf8/class/Patchwork/Utf8.php',
     'Patchwork\\Utf8\\Bootup' => $vendorDir . '/patchwork/utf8/class/Patchwork/Utf8/Bootup.php',
+    'PostsController' => $baseDir . '/app/controllers/admin/PostsController.php',
     'Predis\\Autoloader' => $vendorDir . '/predis/predis/lib/Predis/Autoloader.php',
     'Predis\\BasicClientInterface' => $vendorDir . '/predis/predis/lib/Predis/BasicClientInterface.php',
     'Predis\\Client' => $vendorDir . '/predis/predis/lib/Predis/Client.php',

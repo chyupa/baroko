@@ -90,7 +90,7 @@ class ProductsController extends \BaseController {
 		$path = public_path()."/uploads/".$product->id."/";
 		try
 		{
-			$tst = $file->move($path, $filename);
+			$move = $file->move($path, $filename);
 		}
 		catch(Exception $e)
 		{
