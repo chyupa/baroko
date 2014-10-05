@@ -28,4 +28,5 @@ Route::group(array('prefix'=>'admin', 'before'=>'auth'), function(){
 	Route::resource('subcategories', 'SubcategoriesController');
 	Route::resource('gallery', 'GalleryController', ['only'=>'destroy']);
 	Route::resource('posts', 'PostsController');
+	Route::resource('orders', 'OrdersController');
 });

@@ -11,7 +11,8 @@ class PostsController extends \BaseController {
 	public function index()
 	{
 		//
-		return View::make('admin.posts.index');
+		$posts = Posts::with('postsgallery')->get();
+		return View::make('admin.posts.index', compact('posts'));
 	}
 
 	/**
@@ -43,6 +44,8 @@ class PostsController extends \BaseController {
 			return Redirect::back()->withInput()->withErrors($validator);
 		}
 
+		$post = Posts::create($data);
+
 		if( Input::has('filename') )
 		{
 			$fileValidator = Validator::make( array('filename' => Input::file('filename')), PostsGallery::$rules );
@@ -50,28 +53,27 @@ class PostsController extends \BaseController {
 			{
 				return Redirect::back()->withInput()->withErrors($fileValidator);
 			}
+			$file = Input::file('filename');
+			$extension = $file->getClientOriginalExtension();
+			$filename = Str::quickRandom($length = 16).time().".{$extension}";
+
+			
+
+			$path = public_path()."/uploads/posts/".$post->id."/";
+			try
+			{
+				$move = $file->move($path, $filename);
+			}
+			catch(Exception $e)
+			{
+				Log::error($e->getMessage());
+			}
+
+			PostsGallery::create([
+				'filename' => $filename,
+				'post_id' => $post->id
+			]);
 		}
-
-		$file = Input::file('filename');
-		$extension = $file->getClientOriginalExtension();
-		$filename = Str::quickRandom($length = 16).time().".{$extension}";
-
-		$post = Posts::create($data);
-
-		$path = public_path()."/uploads/posts/".$post->id."/";
-		try
-		{
-			$move = $file->move($path, $filename);
-		}
-		catch(Exception $e)
-		{
-			Log::error($e->getMessage());
-		}
-
-		PostsGallery::create([
-			'filename' => $filename,
-			'post_id' => $post->id
-		]);
 
 		return Redirect::route('admin.posts.index');
 	}
@@ -98,6 +100,8 @@ class PostsController extends \BaseController {
 	public function edit($id)
 	{
 		//
+		$post = Posts::find($id)->with('postsgallery')->first();
+		return View::make('admin.posts.edit', compact('post'));
 	}
 
 	/**
@@ -110,6 +114,25 @@ class PostsController extends \BaseController {
 	public function update($id)
 	{
 		//
+		$data = Input::except('_token', '_method');
+		dd($data);
+		if( Input::has('filename') )
+		{
+			$fileValidator = Validator::make($data, PostsGallery::$rules);
+			if( $fileValidator->fails() )
+			{
+				return Redirect::back()->withInput()->withErrors($fileValidator);
+			}
+		}
+
+		$validator = Validator::make($data, Posts::$rules);
+		if( $validator->fails() )
+		{
+			return Redirect::back()->withInput()->withErrors($validator);
+		}
+
+		$post = Posts::findOrFail($id);
+		$post->update($data);
 	}
 
 	/**

@@ -10,6 +10,6 @@ class PostsGallery extends \Eloquent {
 
 	public function posts()
 	{
-		return $this->belongsTo('posts');
+		return $this->belongsTo('Posts', 'id');
 	}
 }

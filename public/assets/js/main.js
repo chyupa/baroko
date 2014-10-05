@@ -28,15 +28,4 @@ $(document).ready(function(){
 			}
 		});
 	});
-
-	$('.topmenus li').each( function(){
-		console.log($(this));
-
-		$(this).mouseenter(function(event){
-			$(this).children('div').show();
-		}).mouseleave(function(event) {
-			/* Act on the event */
-			$(this).children('div').hide();
-		});
-	})
 });

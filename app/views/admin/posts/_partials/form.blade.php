@@ -3,10 +3,13 @@
 	{{ Form::text('name', null, ['class'=>'form-control']) }}
 	{{ $errors->first('name', '<p class="error">:message</p>') }}
 </div>
-<div class="form-group">
+<div class="form-group clearfix">
 	{{ Form::label('filename', 'Choose picture') }}
 	{{ Form::file('filename', ['class'=>'form-control']) }}
 	{{ $errors->first('filename', '<p class="error">:message</p>') }}
+	@if(isset($post->postsgallery->id))
+		<img src="/uploads/posts/{{$post->id}}/{{$post->postsgallery->filename}}" class="col-md-3 clear">
+	@endif
 </div>
 <div class="form-group">
 	{{ Form::label('content', 'Content') }}

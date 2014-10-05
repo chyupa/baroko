@@ -8,8 +8,8 @@ class Posts extends \Eloquent {
 		'content' => 'required'
 	];
 
-	public function posts_gallery()
+	public function postsgallery()
 	{
-		return $this->hasOne('posts_gallery');
+		return $this->hasOne('PostsGallery', 'post_id');
 	}
 }
