@@ -11,7 +11,7 @@ class CategoriesController extends \BaseController {
 	public function index()
 	{
 		//
-		$categories = Categories::all();
+		$categories = Categories::where('parent', '=', '0')->get();
 		return View::make('admin.categories.index', compact('categories'));
 	}
 
